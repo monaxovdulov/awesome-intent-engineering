@@ -1,0 +1,45 @@
+name: Track a new term
+description: Record a dated engineering label before deciding whether it belongs in the glossary.
+title: "[Term]: "
+labels: [term-watch]
+body:
+  - type: input
+    id: term
+    attributes:
+      label: Term
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Earliest primary source found
+      placeholder: https://
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: Source date
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true
+  - type: textarea
+    id: surface
+    attributes:
+      label: Engineering control surface
+      description: What object, decision, artifact, or mechanism does the term name?
+    validations:
+      required: true
+  - type: textarea
+    id: overlap
+    attributes:
+      label: Overlap with existing terms
+    validations:
+      required: true
+  - type: textarea
+    id: independent_signals
+    attributes:
+      label: Independent substantive uses
+      description: List projects, papers, jobs, or conference sessions beyond the originating post.
+    validations:
+      required: false

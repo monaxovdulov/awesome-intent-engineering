@@ -1,0 +1,315 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:awesome-intent-engineering:intent-record:v0.1",
+  "title": "Experimental Intent Record v0.1",
+  "description": "A discussion schema for comparing intent-engineering systems. It is not a standard.",
+  "type": "object",
+  "required": ["version", "intent"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "const": "0.1"
+    },
+    "intent": {
+      "$ref": "#/$defs/intentRecord"
+    }
+  },
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_-]{2,63}$"
+    },
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "traceTarget": {
+      "type": "string",
+      "pattern": "^(objective|outcome:[A-Z][A-Z0-9_-]{2,63}|constraint:[A-Z][A-Z0-9_-]{2,63}|edge-case:[A-Z][A-Z0-9_-]{2,63})$"
+    },
+    "owner": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "team": {"$ref": "#/$defs/nonEmptyString"},
+        "person": {"$ref": "#/$defs/nonEmptyString"},
+        "role": {"$ref": "#/$defs/nonEmptyString"}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["id", "type", "source", "summary", "authorship", "supports"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/stableId"},
+        "type": {
+          "type": "string",
+          "enum": ["quote", "observation", "metric", "ticket", "decision", "runtime-signal", "research", "other"]
+        },
+        "source": {"$ref": "#/$defs/nonEmptyString"},
+        "summary": {"$ref": "#/$defs/nonEmptyString"},
+        "authorship": {
+          "type": "string",
+          "enum": ["observed-human", "human-authored", "human-approved-model-derived", "model-derived", "system-inferred", "runtime-observed"]
+        },
+        "recorded_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "supports": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/traceTarget"}
+        }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["id", "statement"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/stableId"},
+        "statement": {"$ref": "#/$defs/nonEmptyString"},
+        "priority": {
+          "type": "string",
+          "enum": ["must", "should", "could"]
+        }
+      }
+    },
+    "constraint": {
+      "type": "object",
+      "required": ["id", "statement", "strength"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/stableId"},
+        "statement": {"$ref": "#/$defs/nonEmptyString"},
+        "strength": {
+          "type": "string",
+          "enum": ["hard", "preference"]
+        },
+        "scope": {"$ref": "#/$defs/nonEmptyString"}
+      }
+    },
+    "edgeCase": {
+      "type": "object",
+      "required": ["id", "scenario", "expected_behavior"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/stableId"},
+        "scenario": {"$ref": "#/$defs/nonEmptyString"},
+        "expected_behavior": {"$ref": "#/$defs/nonEmptyString"}
+      }
+    },
+    "decision": {
+      "type": "object",
+      "required": ["id", "statement", "status", "rationale"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/stableId"},
+        "statement": {"$ref": "#/$defs/nonEmptyString"},
+        "status": {
+          "type": "string",
+          "enum": ["approved", "rejected", "superseded"]
+        },
+        "rationale": {"$ref": "#/$defs/nonEmptyString"},
+        "reconsider_when": {"$ref": "#/$defs/nonEmptyString"}
+      }
+    },
+    "verification": {
+      "type": "object",
+      "required": ["id", "method", "requirement", "independence", "supports"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/stableId"},
+        "method": {
+          "type": "string",
+          "enum": ["automated-test", "static-check", "manual-observation", "runtime-signal", "audit", "other"]
+        },
+        "requirement": {"$ref": "#/$defs/nonEmptyString"},
+        "independence": {
+          "type": "string",
+          "enum": ["same-agent", "separate-agent", "mechanical", "human", "runtime"]
+        },
+        "supports": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/traceTarget"}
+        }
+      }
+    },
+    "intentRecord": {
+      "type": "object",
+      "required": [
+        "id",
+        "status",
+        "owner",
+        "objective",
+        "rationale",
+        "evidence",
+        "outcomes",
+        "constraints",
+        "scope",
+        "authority",
+        "verification",
+        "stop",
+        "provenance",
+        "evolution"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/stableId"},
+        "status": {
+          "type": "string",
+          "enum": ["draft", "proposed", "approved", "active", "verified", "superseded", "rejected"]
+        },
+        "owner": {"$ref": "#/$defs/owner"},
+        "objective": {"$ref": "#/$defs/nonEmptyString"},
+        "rationale": {"$ref": "#/$defs/nonEmptyString"},
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/evidence"}
+        },
+        "outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/outcome"}
+        },
+        "constraints": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/constraint"}
+        },
+        "scope": {
+          "type": "object",
+          "required": ["in", "out"],
+          "additionalProperties": false,
+          "properties": {
+            "in": {
+              "type": "array",
+              "minItems": 1,
+              "items": {"$ref": "#/$defs/nonEmptyString"}
+            },
+            "out": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/nonEmptyString"}
+            }
+          }
+        },
+        "edge_cases": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/edgeCase"}
+        },
+        "decisions": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/decision"}
+        },
+        "authority": {
+          "type": "object",
+          "required": ["agent_may", "requires_approval", "forbidden"],
+          "additionalProperties": false,
+          "properties": {
+            "agent_may": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/nonEmptyString"}
+            },
+            "requires_approval": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/nonEmptyString"}
+            },
+            "forbidden": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/nonEmptyString"}
+            }
+          }
+        },
+        "verification": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/verification"}
+        },
+        "stop": {
+          "type": "object",
+          "required": ["success", "escalate", "abandon"],
+          "additionalProperties": false,
+          "properties": {
+            "success": {"$ref": "#/$defs/nonEmptyString"},
+            "escalate": {"$ref": "#/$defs/nonEmptyString"},
+            "abandon": {"$ref": "#/$defs/nonEmptyString"}
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "required": ["created_at", "created_by", "authorship", "approved_by", "source_refs"],
+          "additionalProperties": false,
+          "properties": {
+            "created_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "created_by": {"$ref": "#/$defs/nonEmptyString"},
+            "authorship": {
+              "type": "string",
+              "enum": ["human-authored", "human-approved-model-derived", "model-derived", "system-inferred", "mixed"]
+            },
+            "approved_by": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/nonEmptyString"}
+            },
+            "source_refs": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/nonEmptyString"}
+            },
+            "derived_artifacts": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/nonEmptyString"}
+            }
+          }
+        },
+        "evolution": {
+          "type": "object",
+          "required": ["supersedes", "findings", "rejected_paths"],
+          "additionalProperties": false,
+          "properties": {
+            "supersedes": {
+              "type": ["string", "null"]
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id", "statement", "source", "disposition"],
+                "additionalProperties": false,
+                "properties": {
+                  "id": {"$ref": "#/$defs/stableId"},
+                  "statement": {"$ref": "#/$defs/nonEmptyString"},
+                  "source": {"$ref": "#/$defs/nonEmptyString"},
+                  "disposition": {
+                    "type": "string",
+                    "enum": ["open", "accepted", "rejected", "superseded"]
+                  }
+                }
+              }
+            },
+            "rejected_paths": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id", "approach", "reason", "reconsider_when"],
+                "additionalProperties": false,
+                "properties": {
+                  "id": {"$ref": "#/$defs/stableId"},
+                  "approach": {"$ref": "#/$defs/nonEmptyString"},
+                  "reason": {"$ref": "#/$defs/nonEmptyString"},
+                  "reconsider_when": {"$ref": "#/$defs/nonEmptyString"}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

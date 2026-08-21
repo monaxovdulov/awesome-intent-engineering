@@ -1,0 +1,47 @@
+name: Add or resolve a prediction
+description: Propose a timestamped forecast or submit resolution evidence.
+title: "[Prediction]: "
+labels: [prediction]
+body:
+  - type: dropdown
+    id: action
+    attributes:
+      label: Action
+      options:
+        - Add a new prediction
+        - Submit resolution evidence
+        - Add a calibration note
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: Claim or prediction ID
+    validations:
+      required: true
+  - type: input
+    id: deadline
+    attributes:
+      label: Resolution deadline for a new prediction
+      placeholder: YYYY-MM-DD
+    validations:
+      required: false
+  - type: input
+    id: confidence
+    attributes:
+      label: Confidence for a new prediction
+      placeholder: "0.00 to 1.00"
+    validations:
+      required: false
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Primary-source evidence
+    validations:
+      required: true
+  - type: textarea
+    id: rule
+    attributes:
+      label: Resolution or falsification rule
+    validations:
+      required: true

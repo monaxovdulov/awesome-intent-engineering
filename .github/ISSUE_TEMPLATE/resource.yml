@@ -1,0 +1,63 @@
+name: Suggest a resource
+description: Propose a tool, format, paper, or learning resource with primary-source evidence.
+title: "[Resource]: "
+labels: [resource]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Resource name
+    validations:
+      required: true
+  - type: input
+    id: canonical_url
+    attributes:
+      label: Canonical primary-source URL
+      placeholder: https://
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Proposed category
+      options:
+        - core
+        - provenance
+        - adjacent
+        - research
+        - learning
+        - experimental
+    validations:
+      required: true
+  - type: checkboxes
+    id: lifecycle
+    attributes:
+      label: Lifecycle operations
+      options:
+        - label: capture
+        - label: represent
+        - label: propagate
+        - label: enforce
+        - label: verify
+        - label: evolve
+        - label: provenance
+        - label: governance
+  - type: textarea
+    id: mechanism
+    attributes:
+      label: Inspectable mechanism
+      description: What artifact, data structure, trace, or verification behavior makes this relevant?
+    validations:
+      required: true
+  - type: textarea
+    id: limitation
+    attributes:
+      label: Material limitation or current status
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Additional primary sources
+    validations:
+      required: false

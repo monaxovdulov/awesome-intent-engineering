@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask or debate a classification
+    url: https://github.com/monaxovdulov/awesome-intent-engineering/discussions
+    about: Use Discussions for open questions, field boundaries, and longer-form debate.
+  - name: Read the contribution guide
+    url: https://github.com/monaxovdulov/awesome-intent-engineering/blob/main/CONTRIBUTING.md
+    about: Check the evidence and inclusion requirements before submitting a change.

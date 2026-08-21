@@ -1,0 +1,72 @@
+version: 1
+created: 2026-08-21
+method: Predictions remain immutable except for status, resolution evidence, and explicitly logged calibration notes.
+
+predictions:
+  - id: P001
+    claim: Intent diff becomes a standard review surface in multiple AI-assisted development tools.
+    window_end: 2027-12-31
+    confidence: 0.78
+    status: open
+    evidence_at_creation:
+      - https://codespeak.dev/blog/spindle-20260713
+    resolution_rule: Resolve true when at least three independent tools ship a review surface that explicitly compares changes in goals, requirements, constraints, or decisions.
+    falsification: Resolve false if by the window end the capability remains confined to one project or is consistently absorbed into ordinary code/spec diffs without a distinct intent view.
+
+  - id: P002
+    claim: Intent coverage becomes a maintained metric in multiple tools or public benchmarks.
+    window_end: 2027-12-31
+    confidence: 0.72
+    status: open
+    evidence_at_creation:
+      - https://specleft.dev/
+      - https://codespeak.dev/blog/spindle-20260713
+    resolution_rule: Resolve true when at least three independent implementations publish a maintained intent-coverage metric with a documented denominator.
+    falsification: Resolve false if usage remains a one-off label without stable calculation semantics.
+
+  - id: P003
+    claim: Bidirectional intent-to-code-or-test traceability becomes a recognizable product category.
+    window_end: 2027-12-31
+    confidence: 0.70
+    status: open
+    evidence_at_creation:
+      - https://codespeak.dev/
+      - https://specleft.dev/
+      - https://intentspec.org/
+    resolution_rule: Resolve true when multiple products market and ship both forward traceability from intent to implementation and backward findings from implementation to intent.
+    falsification: Resolve false if links remain manual, one-way, or incidental in most products.
+
+  - id: P004
+    claim: Larger agent-native projects move from one monolithic intent file toward trees, graphs, or atomic requirement stores.
+    window_end: 2027-12-31
+    confidence: 0.66
+    status: open
+    evidence_at_creation:
+      - https://codespeak.dev/blog/spindle-20260713
+      - https://www.intent-driven-development.com/
+      - https://openai.com/index/harness-engineering/
+    resolution_rule: Resolve true when at least three established systems document structured inheritance or atomic selection as their default scaling model.
+    falsification: Resolve false if monolithic or per-feature Markdown remains dominant without structured indexing or inheritance.
+
+  - id: P005
+    claim: Evidence quality and uncertainty become explicit inputs to agent authority, deployment, spending, or escalation policies.
+    window_end: 2028-06-30
+    confidence: 0.75
+    status: open
+    evidence_at_creation:
+      - https://arxiv.org/abs/2608.07317
+    resolution_rule: Resolve true when at least two production agent platforms expose policies that change permitted actions based on verified evidence or assurance confidence.
+    falsification: Resolve false if permissions remain static and disconnected from verification quality across the window.
+
+  - id: P006
+    claim: Intent Engineering becomes a recognizable umbrella term across tools, research, communities, and job descriptions.
+    window_end: 2027-06-30
+    confidence: 0.64
+    status: open
+    evidence_at_creation:
+      - https://intentspec.org/
+      - https://github.com/roboco-io/intent-engineering
+      - https://intent-engineering-for-coding-agents.github.io/book/
+      - https://arxiv.org/abs/2603.09619
+    resolution_rule: Resolve true when the term is used independently by at least ten substantive projects or papers and appears in at least five public role descriptions or conference tracks.
+    falsification: Resolve false if another term clearly dominates the same control surface and Intent Engineering remains limited to a small cluster of related projects.

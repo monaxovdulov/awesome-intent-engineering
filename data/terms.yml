@@ -1,0 +1,90 @@
+version: 1
+last_reviewed: 2026-08-21
+
+terms:
+  - id: intent-engineering
+    label: Intent Engineering
+    status: emerging
+    working_definition: Designing and maintaining artifacts and mechanisms that carry human goals, rationale, constraints, trade-offs, authority, and success criteria into agent execution and verification.
+    signals:
+      - https://intentspec.org/
+      - https://github.com/roboco-io/intent-engineering
+      - https://intent-engineering-for-coding-agents.github.io/book/
+      - https://arxiv.org/abs/2603.09619
+
+  - id: intent-driven-development
+    label: Intent-Driven Development
+    status: emerging
+    working_definition: A development approach that keeps why and what-to-achieve as durable source artifacts and derives or constrains downstream specification and implementation from them.
+    signals:
+      - https://www.intent-driven-development.com/
+      - https://github.com/J-Tech-Japan/intent-system
+
+  - id: intent-debt
+    label: Intent Debt
+    status: research-backed
+    working_definition: The absence or erosion of explicit rationale, goals, and constraints needed by future humans and agents to evolve a system safely.
+    signals:
+      - https://arxiv.org/abs/2603.22106
+      - https://addyosmani.com/blog/intent-debt/
+
+  - id: intent-loss
+    label: Intent Loss
+    status: practitioner
+    working_definition: Original requirements or rationale becoming inaccessible inside transient chat history, generated code, or stale artifacts.
+    signals:
+      - https://codespeak.dev/blog/spindle-20260713
+
+  - id: intent-diff
+    label: Intent Diff
+    status: planned-emerging
+    working_definition: A review surface showing which goals, requirements, constraints, or decisions were added, removed, refined, or superseded.
+    signals:
+      - https://codespeak.dev/blog/spindle-20260713
+
+  - id: intent-coverage
+    label: Intent Coverage
+    status: emerging
+    working_definition: A measure of how much declared intent is connected to implementation and verification evidence.
+    signals:
+      - https://specleft.dev/
+      - https://codespeak.dev/blog/spindle-20260713
+
+  - id: intent-drift
+    label: Intent Drift
+    status: research-and-practice
+    working_definition: Divergence between intended outcomes or constraints and agent output or system behavior.
+    signals:
+      - https://arxiv.org/abs/2607.29516
+      - https://specleft.dev/
+      - https://codespeak.dev/
+
+  - id: living-spec
+    label: Living Spec
+    status: established-pattern
+    working_definition: A specification maintained for the lifetime of the capability it describes rather than only for one change.
+    signals:
+      - https://codespeak.dev/blog/spindle-20260713
+
+  - id: change-spec
+    label: Change Spec
+    status: established-pattern
+    working_definition: A bounded specification used to coordinate one change and usually no longer maintained as the current feature description after completion.
+    signals:
+      - https://codespeak.dev/blog/spindle-20260713
+      - https://github.com/github/spec-kit
+      - https://github.com/Fission-AI/OpenSpec
+
+  - id: agentic-entropy
+    label: Agentic Entropy
+    status: research-proposal
+    working_definition: Accumulating divergence between agent actions and architectural intent across time, tools, and system boundaries.
+    signals:
+      - https://arxiv.org/abs/2604.16323
+
+  - id: assurance-closure
+    label: Assurance Closure
+    status: research-proposal
+    working_definition: A state where the system establishes what must be true, obtains and assesses evidence, preserves validity, and bounds authority using remaining uncertainty.
+    signals:
+      - https://arxiv.org/abs/2608.07317

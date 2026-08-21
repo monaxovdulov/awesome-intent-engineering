@@ -1,0 +1,136 @@
+# Experimental discussion record validated by schemas/intent-record.v0.1.schema.json.
+# This is a comparison artifact, not a standard.
+version: "0.1"
+
+intent:
+  id: INT-EXPORT-JSON-001
+  status: approved
+
+  owner:
+    team: Data Experience
+    role: Product owner
+
+  objective: Allow users to export the currently filtered dataset as JSON.
+  rationale: Users need an inspectable export without downloading unrelated rows or exposing configured PII fields.
+
+  evidence:
+    - id: EVIDENCE-001
+      type: quote
+      source: support-ticket-4421
+      summary: User could not determine whether an export respected the active filter.
+      authorship: observed-human
+      recorded_at: "2026-08-20T12:30:00Z"
+      supports:
+        - objective
+        - outcome:OUTCOME-001
+        - constraint:CONSTRAINT-002
+
+  outcomes:
+    - id: OUTCOME-001
+      statement: Selecting Export downloads a JSON file containing only the current filtered result.
+      priority: must
+    - id: OUTCOME-002
+      statement: An empty result displays an explanatory message and creates no file.
+      priority: must
+
+  constraints:
+    - id: CONSTRAINT-001
+      statement: Serialization runs client-side.
+      strength: hard
+      scope: Export execution
+    - id: CONSTRAINT-002
+      statement: The output excludes every field configured as PII.
+      strength: hard
+      scope: Serialized payload
+    - id: CONSTRAINT-003
+      statement: Prefer streaming serialization above 10,000 rows.
+      strength: preference
+      scope: Large exports
+
+  scope:
+    in:
+      - JSON export from the current filtered dataset
+      - Empty-result behavior
+      - Existing PII configuration
+    out:
+      - Filter interface redesign
+      - CSV export replacement
+
+  edge_cases:
+    - id: EDGE-EMPTY-RESULT
+      scenario: The active filter returns zero rows.
+      expected_behavior: Show “Nothing to export” and create no file.
+
+  decisions:
+    - id: DECISION-CLIENT-SIDE
+      statement: Generate the JSON file in the browser.
+      status: approved
+      rationale: This preserves the current client-side privacy boundary.
+    - id: DECISION-SERVER-ENDPOINT
+      statement: Add a server-side export endpoint.
+      status: rejected
+      rationale: It creates a new data-processing path for a feature that can be delivered locally.
+      reconsider_when: Validated file-size limits make client-side generation infeasible for a material user segment.
+
+  authority:
+    agent_may:
+      - Read repository files.
+      - Modify implementation and tests on a feature branch.
+      - Run local checks.
+      - Open a pull request.
+    requires_approval:
+      - Deploy to production.
+      - Change the PII policy.
+      - Remove the CSV export.
+    forbidden:
+      - Upload export data to a third-party service.
+
+  verification:
+    - id: VERIFY-FILTERED-PAYLOAD
+      method: automated-test
+      requirement: The serializer includes only filtered rows and excludes configured PII keys.
+      independence: mechanical
+      supports:
+        - outcome:OUTCOME-001
+        - constraint:CONSTRAINT-002
+    - id: VERIFY-EMPTY-RESULT
+      method: automated-test
+      requirement: An empty result displays the message and creates no file.
+      independence: mechanical
+      supports:
+        - outcome:OUTCOME-002
+        - edge-case:EDGE-EMPTY-RESULT
+    - id: VERIFY-RUNTIME-ERROR-RATE
+      method: runtime-signal
+      requirement: The export error rate remains below 0.5 percent for seven days after release.
+      independence: runtime
+      supports:
+        - objective
+
+  stop:
+    success: All required verification records pass and the approved runtime observation window closes.
+    escalate: A hard constraint conflicts with an existing repository policy or requires authority outside the feature team.
+    abandon: The browser cannot produce compliant files within the validated performance envelope.
+
+  provenance:
+    created_at: "2026-08-21T09:00:00Z"
+    created_by: Data Experience product team
+    authorship: human-authored
+    approved_by:
+      - Product owner
+      - Security reviewer
+    source_refs:
+      - support-ticket-4421
+      - privacy-policy-v3
+    derived_artifacts:
+      - implementation-plan.md
+      - tests/export_json_test.py
+
+  evolution:
+    supersedes: null
+    findings: []
+    rejected_paths:
+      - id: REJECTED-SERVER-ENDPOINT
+        approach: Server-side export endpoint
+        reason: Adds a data-processing path that conflicts with the client-side privacy boundary.
+        reconsider_when: File-size limits make client-side generation infeasible for a validated user segment.

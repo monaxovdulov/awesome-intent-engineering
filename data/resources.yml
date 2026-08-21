@@ -1,0 +1,324 @@
+version: 1
+last_reviewed: 2026-08-21
+
+resources:
+  - id: codespeak
+    name: CodeSpeak
+    url: https://codespeak.dev/
+    category: core
+    lifecycle: [capture, represent, propagate, enforce, verify, evolve, provenance]
+    availability: waitlist
+    maturity: emerging
+    representation: Interconnected structured requirements grounded in human prompts and accepted code.
+    description: Captures intent from coding-agent chats, maps structured requirements to code, and exposes them during planning and verification.
+    limitation: The new product is upcoming; intent diffs, bidirectional code links, generated tests, and intent coverage are roadmap items rather than shipped claims.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://codespeak.dev/
+        supports: Current positioning, chat capture, requirement-to-code mapping, planning, verification, and waitlist status.
+      - url: https://codespeak.dev/blog/spindle-20260713
+        supports: Atomic structured requirements, authorship separation, intent evolution, and roadmap.
+
+  - id: intentspec
+    name: IntentSpec
+    url: https://intentspec.org/
+    category: core
+    lifecycle: [capture, represent, propagate, enforce, verify, provenance]
+    availability: open-format
+    maturity: operational
+    representation: Per-feature Markdown with YAML frontmatter and JSON Schema.
+    description: Carries evidence-backed objectives, outcomes, constraints, edge cases, and verification into coding-agent workflows.
+    limitation: Schema validation checks structure and completeness; it cannot prove that the product judgment or evidence is correct.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://intentspec.org/
+        supports: Format, evidence anchors, agent handoff, JSON Schema, and CI validation.
+
+  - id: pathmode
+    name: Pathmode
+    url: https://pathmode.io/
+    category: core
+    lifecycle: [capture, represent, propagate, verify, evolve, provenance]
+    availability: commercial
+    maturity: emerging
+    representation: Executable intent specs built from product evidence, strategy, and decisions.
+    description: Structures evidence into objectives, outcomes, constraints, edge cases, and checks, then hands the result to agents and receives findings back.
+    limitation: Capability and outcome claims are vendor-reported; evaluate against your own workflow and data-governance requirements.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://pathmode.io/
+        supports: Evidence capture, intent shaping, agent handoff, verification, and findings write-back.
+
+  - id: intent-system
+    name: Intent-System
+    url: https://github.com/J-Tech-Japan/intent-system
+    category: core
+    lifecycle: [capture, represent, propagate, enforce, verify, evolve, governance, provenance]
+    availability: open-source
+    maturity: emerging
+    representation: Intent tree, child issue contracts, and GitHub metadata.
+    description: Provides deterministic support tooling for intent-driven design, issue publication, implementation and review loops, and recovery.
+    limitation: The operational model and orchestration are more involved than a single-document workflow.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://www.intent-driven-development.com/
+        supports: Intent-as-source, tree representation, upstream relationship to SDD, and supervised workflow.
+      - url: https://github.com/J-Tech-Japan/intent-system
+        supports: CLI scope, GitHub contracts, implementation/review loops, and recovery.
+
+  - id: matthewsinclair-intent
+    name: Intent
+    url: https://github.com/matthewsinclair/intent
+    category: core
+    lifecycle: [capture, represent, propagate, verify, evolve, provenance]
+    availability: open-source
+    maturity: operational
+    representation: Versioned Steel Threads containing why, what, design, implementation, and tasks.
+    description: Preserves why code exists and organizes feature work into agent-readable, source-controlled threads and work packages.
+    limitation: Uses an opinionated project-management and repository method that teams need to adopt consistently.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://github.com/matthewsinclair/intent
+        supports: Steel Thread model, rationale capture, CLI, and agent integration.
+
+  - id: roboco-intent-engineering
+    name: Intent Engineering / INTENT.md
+    url: https://github.com/roboco-io/intent-engineering
+    category: core
+    lifecycle: [capture, represent, propagate, evolve]
+    availability: open-source
+    maturity: discussion-draft
+    representation: One INTENT.md containing Why, What, Not, and Learnings.
+    description: Proposes a small, inspectable project-intent artifact and a lifecycle from seed through exploration, clarification, build, or rejection.
+    limitation: Does not attempt the traceability, inheritance, or merge semantics required by larger multi-team systems.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://github.com/roboco-io/intent-engineering
+        supports: Document structure and lifecycle.
+
+  - id: specleft
+    name: SpecLeft
+    url: https://github.com/SpecLeft/specleft
+    category: core
+    lifecycle: [represent, propagate, enforce, verify, provenance]
+    availability: open-source
+    maturity: operational
+    representation: Markdown feature and scenario specifications with stable trace identifiers.
+    description: Links declared behavioral intent to pytest test scenarios and reports missing behavior, orphaned tests, and intent coverage.
+    limitation: Python and pytest are the current primary path; support for other ecosystems is exploratory.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://specleft.dev/
+        supports: Behavioral traceability, gap analysis, intent coverage, and current platform scope.
+      - url: https://github.com/SpecLeft/specleft
+        supports: Open-source implementation and CLI workflow.
+
+  - id: linked-intent-development
+    name: Linked-Intent Development
+    url: https://github.com/jszmajda/lid
+    category: core
+    lifecycle: [capture, represent, propagate, enforce, verify, evolve, provenance]
+    availability: open-source
+    maturity: operational
+    representation: Linked HLD, LLD, EARS requirement, test, and code artifacts with stable trace identifiers.
+    description: Maintains a directional chain from durable design intent through testable specifications to tests and implementation, with repository links that support navigation and attestation.
+    limitation: The method requires sustained design discipline; its richest automation currently targets Claude Code while other agents rely on project instructions.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://github.com/jszmajda/lid
+        supports: Arrow-of-intent model, HLD-to-code trace chain, maintenance workflow, and supported agent paths.
+
+  - id: intent-integrity-kit
+    name: Intent Integrity Kit
+    url: https://github.com/intent-integrity-chain/kit
+    category: core
+    lifecycle: [capture, represent, propagate, enforce, verify, evolve, provenance, governance]
+    availability: open-source
+    maturity: operational
+    representation: Intent-to-spec-to-Gherkin-to-test-to-code chain with stable requirement tags and locked artifacts.
+    description: Enforces a phased specification and BDD workflow, hashes approved feature steps before implementation, checks test coverage and quality, and requires requirement changes to restart the relevant chain.
+    limitation: Distribution and workflow are opinionated, and cryptographic integrity proves artifact continuity rather than correctness of the original intent.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://github.com/intent-integrity-chain/kit
+        supports: Workflow phases, trace tags, hash locking, verification chain, agent compatibility, and limitations.
+
+  - id: intent-file-specification
+    name: Intent File Specification
+    url: https://github.com/IntentFile/intent-specification
+    category: core
+    lifecycle: [represent, propagate, enforce, evolve, governance]
+    availability: open-format
+    maturity: emerging
+    representation: Versioned vendor-neutral YAML format describing application entities, workflows, forms, reports, permissions, integrations, and seed data.
+    description: Defines a declarative application-intent layer above generated platform models and evolves through immutable versions and public proposals.
+    limitation: Its scope targets model-driven application generation and stops at the model layer; it is not a general provenance or assurance format for arbitrary coding-agent work.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://github.com/IntentFile/intent-specification
+        supports: Normative format, scope boundary, versioning, proposals, examples, and governance.
+
+  - id: selvedge
+    name: Selvedge
+    url: https://github.com/masondelan/selvedge
+    category: provenance
+    lifecycle: [evolve, provenance]
+    availability: open-source
+    maturity: operational
+    representation: Local SQLite event store of agent-authored change rationale and entity history.
+    description: Captures rationale, constraints, supersession, and rejected paths while the original agent context still exists.
+    limitation: Agent-authored rationale is provenance about execution and should not be treated as approved human intent without an explicit link or approval.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://github.com/masondelan/selvedge
+        supports: Live rationale capture, local storage, entity history, and rejected-path querying.
+
+  - id: github-spec-kit
+    name: GitHub Spec Kit
+    url: https://github.com/github/spec-kit
+    category: adjacent
+    lifecycle: [represent, propagate, enforce, verify, evolve]
+    availability: open-source
+    maturity: operational
+    representation: Governing principles, feature specs, plans, task lists, and execution artifacts.
+    description: Provides a spec-driven process for defining what and why, planning implementation, generating tasks, executing, and checking convergence.
+    limitation: Primarily a specification and delivery workflow; product evidence and long-lived intent provenance require complementary artifacts.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://github.com/github/spec-kit
+        supports: Workflow, commands, supported integrations, and core philosophy.
+
+  - id: openspec
+    name: OpenSpec
+    url: https://github.com/Fission-AI/OpenSpec
+    category: adjacent
+    lifecycle: [represent, propagate, enforce, verify, evolve]
+    availability: open-source
+    maturity: operational
+    representation: Proposal, specs, design, tasks, and archived changes.
+    description: Supplies an artifact-guided workflow for exploring, proposing, applying, verifying, and archiving changes across coding agents.
+    limitation: Change artifacts need a separate product-evidence or organization-intent layer when the why must persist beyond the change.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://github.com/Fission-AI/OpenSpec
+        supports: Artifact workflow, requirement scenarios, stores, and supported tools.
+
+  - id: intent-engineering-book
+    name: Intent Engineering for Coding Agents
+    url: https://intent-engineering-for-coding-agents.github.io/book/
+    category: learning
+    lifecycle: [represent, propagate, enforce, verify, provenance]
+    availability: book
+    maturity: emerging
+    representation: Source-controlled repository decisions, ADRs, specs, AGENTS.md, and test traceability.
+    description: Open practical guide for senior developers designing collaboration between humans and coding agents.
+    limitation: The companion checker is illustrative and explicitly not presented as production-grade.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://github.com/intent-engineering-for-coding-agents/book
+        supports: Book scope, companion repository, and licensing.
+
+  - id: rfc9315-intent-based-networking
+    name: RFC 9315 — Intent-Based Networking Concepts and Definitions
+    url: https://www.rfc-editor.org/rfc/rfc9315.html
+    category: research
+    lifecycle: [capture, represent, propagate, enforce, verify, evolve, provenance, governance]
+    availability: research
+    maturity: research
+    representation: Declarative goals and outcomes, normalized source of truth, fulfillment plane, assurance plane, and inner/outer control loops.
+    description: Provides prior art for a full intent lifecycle covering ingestion, refinement, translation, orchestration, monitoring, compliance assessment, corrective action, drift, and retraction.
+    limitation: Informational IRTF work for network management; its use in this repository is an editorial adaptation to software-agent systems, not a software-engineering standard.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://www.rfc-editor.org/rfc/rfc9315.html
+        supports: Intent definition, fulfillment and assurance functions, drift, lifecycle, and inner/outer loops.
+
+  - id: intent-debt-paper
+    name: From Technical Debt to Cognitive and Intent Debt
+    url: https://arxiv.org/abs/2603.22106
+    category: research
+    lifecycle: [represent, evolve, provenance]
+    availability: research
+    maturity: research
+    representation: Triple Debt Model.
+    description: Defines intent debt as absent or eroded explicit rationale, goals, and constraints needed to evolve software safely.
+    limitation: Conceptual research article; diagnosis and measurement remain open questions.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://arxiv.org/abs/2603.22106
+        supports: Definition, model, authorship, and submission history.
+
+  - id: code-critique-arctic
+    name: From Code Review to Code Critique
+    url: https://arxiv.org/abs/2607.29516
+    category: research
+    lifecycle: [verify, provenance]
+    availability: research
+    maturity: research
+    representation: Intent prediction, drift score, and code spotlight.
+    description: Evaluates a review system that reconstructs developer intent from conversation logs and metadata and measures divergence in generated diffs.
+    limitation: Predicted intent remains an inference; the reported evaluation setting may not generalize to every repository or workflow.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://arxiv.org/abs/2607.29516
+        supports: System capabilities, evaluation, and submission date.
+
+  - id: agentic-entropy
+    name: "Beyond the Diff: Addressing Agentic Entropy"
+    url: https://arxiv.org/abs/2604.16323
+    category: research
+    lifecycle: [enforce, verify, provenance, governance]
+    availability: research
+    maturity: research
+    representation: Process-oriented intent telemetry and causal graph interface.
+    description: Frames systemic drift between agent actions and architectural intent and proposes monitoring across decisions, tool calls, and boundaries.
+    limitation: Position-paper framework rather than a standardized production implementation.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://arxiv.org/abs/2604.16323
+        supports: Agentic entropy definition and proposed framework.
+
+  - id: assurance-closure
+    name: Towards Assurance Closure
+    url: https://arxiv.org/abs/2608.07317
+    category: research
+    lifecycle: [enforce, verify, evolve, governance]
+    availability: research
+    maturity: research
+    representation: Machine-operable assurance capabilities around a shared semantic layer.
+    description: Connects intent, evidence credibility, change validity, uncertainty, and bounded agent authority.
+    limitation: High-level research architecture; the residual gaps and implementation mechanisms remain open.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://arxiv.org/abs/2608.07317
+        supports: Assurance closure definition, authority relationship, and research scope.
+
+  - id: context-to-corporate-intent
+    name: "Context Engineering: From Prompts to Corporate Multi-Agent Architecture"
+    url: https://arxiv.org/abs/2603.09619
+    category: research
+    lifecycle: [represent, propagate, governance]
+    availability: research
+    maturity: research
+    representation: Layered context, specification, and organizational intent architecture.
+    description: Proposes intent engineering for encoding organizational goals, values, policies, and trade-off hierarchies above agent context.
+    limitation: Broad conceptual framework; terminology and architecture are not industry standards.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://arxiv.org/abs/2603.09619
+        supports: Intent-engineering layer and organizational framing.
+
+  - id: intent-centric-software-engineering
+    name: From Code-Centric to Intent-Centric Software Engineering
+    url: https://arxiv.org/abs/2605.11027
+    category: research
+    lifecycle: [capture, represent, verify, governance]
+    availability: research
+    maturity: research
+    representation: Reflexive thematic analysis of intent, accountability, and agentic work.
+    description: Examines how generative and agentic systems shift engineering attention toward intent, judgment, and accountability.
+    limitation: Qualitative analysis; it does not prescribe a single implementation or data model.
+    last_verified: 2026-08-21
+    evidence:
+      - url: https://arxiv.org/abs/2605.11027
+        supports: Intent-centric framing and accountability analysis.
