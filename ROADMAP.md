@@ -16,9 +16,10 @@
 
 The public GitHub repository starts the incubation clock. Before proposing the list to the canonical Awesome index:
 
-- [ ] create the public repository with default branch `main`;
-- [ ] add the GitHub topics `awesome`, `awesome-list`, `intent-engineering`, `ai-agents`, and `spec-driven-development`;
-- [ ] publish the `v0.2.0` seed release;
+- [x] create the public repository with default branch `main`;
+- [x] add the GitHub topics `awesome`, `awesome-list`, `intent-engineering`, `ai-agents`, and `spec-driven-development`;
+- [x] enable structured issues, Discussions, and private security reporting;
+- [x] publish the `v0.2.0` seed release;
 - [ ] have the maintainer manually review, rewrite where necessary, and take responsibility for every catalog entry;
 - [ ] keep the public list active for at least 30 days;
 - [ ] run the manual `Awesome lint` workflow and resolve every reported issue;

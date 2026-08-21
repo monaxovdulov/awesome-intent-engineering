@@ -11,3 +11,4 @@
 - aligned the list shell with current Awesome conventions: Awesome badge, Contents section, CC0 license, manual awesome-lint workflow, and public-incubation checklist.
 - added a faster README onboarding path, visible catalog freshness, and clearer contribution calls to action;
 - added community conduct, security reporting, code ownership, and automated dependency maintenance.
+- published the public seed with repository topics, Discussions, structured issue labels, and a tagged release.
