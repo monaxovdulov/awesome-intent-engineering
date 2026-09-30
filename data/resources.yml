@@ -173,6 +173,25 @@ resources:
       - url: https://github.com/masondelan/selvedge
         supports: Live rationale capture, local storage, entity history, and rejected-path querying.
 
+  - id: hyperconsciousness
+    name: Hyperconsciousness
+    url: https://github.com/louis030195/hyperconsciousness
+    category: provenance
+    lifecycle: [capture, propagate, evolve, provenance]
+    availability: open-source
+    maturity: emerging
+    representation: Encrypted append-only notes with capture envelopes, declared source references, durable record references, and versioned changes.
+    description: Stores task handoffs containing objectives, decisions, and unresolved questions; distinguishes observations, derived notes, and handoffs for later retrieval through scoped MCP grants.
+    limitation: Developer alpha. Producer labels and source references are caller claims, not verified authorship, causality, or human approval. Retractions suppress current text views but do not erase historical ciphertext or derived copies; task execution and intent verification remain the harness's responsibility.
+    last_verified: 2026-09-30
+    evidence:
+      - url: https://github.com/louis030195/hyperconsciousness/blob/main/docs/CAPTURE-CONTEXT.md
+        supports: Implemented capture categories, handoff workflow, durable references, versioned corrections and retractions, and provenance limits.
+      - url: https://github.com/louis030195/hyperconsciousness/blob/main/MISSION.md
+        supports: Durable knowledge and scoped access boundary; planning, context assembly, and execution belong to separate harnesses.
+      - url: https://github.com/louis030195/hyperconsciousness
+        supports: Developer-alpha status, Rust CLI and MCP interface, source installation, MIT license, and security limitations.
+
   - id: github-spec-kit
     name: GitHub Spec Kit
     url: https://github.com/github/spec-kit
